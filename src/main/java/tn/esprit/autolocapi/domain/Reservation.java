@@ -28,4 +28,15 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
 
+    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY)
+    private Contrat contrat;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client", nullable = false)
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_vehicule", nullable = false)
+    private Vehicule vehicule;
+
 }
