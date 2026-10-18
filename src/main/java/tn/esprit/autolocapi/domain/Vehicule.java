@@ -30,7 +30,7 @@ public class Vehicule {
     private String marque;
 
     @Column(length = 50, nullable = false)
-    private String Modele;
+    private String modele;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
