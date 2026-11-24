@@ -3,7 +3,9 @@ package tn.esprit.autolocapi.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import tn.esprit.autolocapi.domain.Equipement;
 import tn.esprit.autolocapi.domain.Vehicule;
+import tn.esprit.autolocapi.repository.EquipementRepository;
 import tn.esprit.autolocapi.repository.VehiculeRepository;
 
 import java.util.List;
@@ -14,10 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class IVehiculeServiceImp implements IVehiculeService {
 
-    /*@Autowired
-    private VehiculeRepository vehiculeRepository;*/
-
     private final  VehiculeRepository vehiculeRepository;
+    private final EquipementRepository equipementRepository;
 
     @Override
     public Vehicule ajouterVehicule(Vehicule vehicule) {
@@ -45,4 +45,33 @@ public class IVehiculeServiceImp implements IVehiculeService {
 
 
     }
+
+    @Override
+    public Vehicule affecterEquipement(Long idVehicule, Long idEquipement) {
+
+        Vehicule vehicule = vehiculeRepository.findById(idVehicule).orElse(null);
+
+        Equipement equipement = equipementRepository.findById(idEquipement).orElse(null);
+
+        if (vehicule != null && equipement != null) {
+            vehicule.getEquipements().add(equipement);
+            return vehiculeRepository.save(vehicule);
+        }
+        return null;
+    }
+
+    @Override
+    public Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement) {
+
+        Vehicule vehicule = vehiculeRepository.findById(idVehicule).orElse(null);
+
+        Equipement equipement = equipementRepository.findById(idEquipement).orElse(null);
+
+        if (vehicule != null && equipement != null) {
+            vehicule.getEquipements().remove(equipement);
+            return vehiculeRepository.save(vehicule);
+        }
+        return null;
+    }
+
 }

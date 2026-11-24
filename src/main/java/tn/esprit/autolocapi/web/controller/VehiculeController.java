@@ -32,6 +32,20 @@ public class VehiculeController {
     public void supprimerVehiculeById(@PathVariable Long id) {
         vehiculeService.SupprimerVehiculeById(id);
     }
-    
-    
+
+    @PutMapping("/{idVehicule}/affecterEquipement/{idEquipement}")
+    public Vehicule affecterEquipement(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idEquipement) {
+
+        return vehiculeService.affecterEquipement(idVehicule, idEquipement);
+    }
+
+    @PutMapping("/{idVehicule}/desaffecterEquipement/{idEquipement}")
+    public Vehicule desaffecterEquipement(
+            @PathVariable Long idVehicule,
+            @PathVariable Long idEquipement) {
+
+        return vehiculeService.desaffecterEquipement(idVehicule, idEquipement);
+    }
 }
