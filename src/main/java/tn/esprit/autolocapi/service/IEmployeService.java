@@ -14,4 +14,8 @@ public interface IEmployeService {
     public List<Employe> getAllEmployees();
 
     public void supprimerEmployeById(Long employe);
+
+    public Employe desaffecterEmploye (Long idEmploye);
+
+    public Employe affecterEmploye (Long idEmploye,Long idAgence);
 }
